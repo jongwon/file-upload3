@@ -14,17 +14,17 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class FileUpload3SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new InMemoryUserDetailsManager(
-                User.builder().username("user1").password("1234").roles("USER").build()
-        );
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        return new InMemoryUserDetailsManager(
+//                User.builder().username("user1").password("1234").roles("USER").build()
+//        );
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        return NoOpPasswordEncoder.getInstance();
+//    }
 
 
     @Override

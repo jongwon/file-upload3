@@ -41,7 +41,7 @@ public class AuthFileUploadTest2 {
     @Test
     @WithMockUser(username = "user1", roles={"USER"})
     void test_1() throws Exception {
-        doNothing().when(fileService).save(any(MultipartFile.class));
+//        doNothing().when(fileService).save(any(MultipartFile.class));
         String respStr = mockMvc.perform(
                 MockMvcRequestBuilders.multipart("/auth/upload")
                         .file(multipart("file", new ClassPathResource("test1.txt")))
@@ -59,7 +59,7 @@ public class AuthFileUploadTest2 {
     @Test
     @WithMockUser(username = "user1", roles={"USER"})
     void test_2() throws Exception {
-        doNothing().when(fileService).save(any(MultipartFile.class));
+//        doNothing().when(fileService).save(any(MultipartFile.class));
         String respStr = mockMvc.perform(
                         MockMvcRequestBuilders.multipart("/auth/uploads")
                                 .file(multipart("files", new ClassPathResource("test1.txt")))
