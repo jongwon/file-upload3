@@ -3,6 +3,8 @@ package com.sp.fileupload3.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,22 +23,26 @@ public class FileController {
 
     @PostMapping(value="/upload")
     public UploadResult upload(
+            @AuthenticationPrincipal UserDetails user,
             @RequestParam(value="file") MultipartFile file
     ) throws IOException {
         fileService.save(file);
         return UploadResult.builder()
                 .code(100)
+                .userId(user.getUsername())
                 .path(List.of("/files/"+file.getOriginalFilename()))
                 .build();
     }
 
     @PostMapping(value="/uploads")
     public UploadResult uploads(
+            @AuthenticationPrincipal UserDetails user,
             @RequestParam(value="files") MultipartFile[] file
     ){
 
         return UploadResult.builder()
                 .code(100)
+                .userId(user.getUsername())
                 .path(Arrays.stream(file).map(f->{
                     try {
                         fileService.save(f);
