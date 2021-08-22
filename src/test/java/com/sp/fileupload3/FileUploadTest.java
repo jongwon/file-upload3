@@ -2,10 +2,7 @@ package com.sp.fileupload3;
 
 import com.sp.fileupload3.controller.FileService;
 import com.sp.fileupload3.controller.UploadResult;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -46,7 +43,7 @@ public class FileUploadTest extends WebIntegrationTest {
         }
     }
 
-
+    @Disabled
     @DisplayName("1. 파일을 한개 업로드 한다.")
     @Test
     void test_1(){
@@ -71,6 +68,7 @@ public class FileUploadTest extends WebIntegrationTest {
     }
 
 
+    @Disabled
     @DisplayName("2. 파일을 2개 업로드 한다.")
     @Test
     void test_2(){
