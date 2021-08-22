@@ -2,19 +2,12 @@ package com.sp.fileupload3;
 
 import com.sp.fileupload3.controller.FileService;
 import com.sp.fileupload3.controller.UploadResult;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -51,6 +44,7 @@ public class FileUploadTest extends WebIntegrationTest {
     }
 
 
+    @Disabled("csrf-disabled")
     @DisplayName("1. 파일을 한개 업로드 한다.")
     @Test
     void test_1(){
@@ -74,7 +68,7 @@ public class FileUploadTest extends WebIntegrationTest {
         return req;
     }
 
-
+    @Disabled("csrf-disabled")
     @DisplayName("2. 파일을 2개 업로드 한다.")
     @Test
     void test_2(){

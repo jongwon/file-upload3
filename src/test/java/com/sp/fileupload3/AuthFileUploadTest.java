@@ -26,6 +26,7 @@ import java.nio.file.Path;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
@@ -72,6 +73,7 @@ public class AuthFileUploadTest {
         String respStr = mockMvc.perform(
                 MockMvcRequestBuilders.multipart("/auth/upload")
                         .file(multipart("file", new ClassPathResource("test1.txt")))
+                        .with(csrf())
                 )
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
@@ -89,6 +91,7 @@ public class AuthFileUploadTest {
                         MockMvcRequestBuilders.multipart("/auth/uploads")
                                 .file(multipart("files", new ClassPathResource("test1.txt")))
                                 .file(multipart("files", new ClassPathResource("test2.txt")))
+                                .with(csrf())
                 )
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
