@@ -14,6 +14,7 @@ import java.util.List;
 public class UploadResult {
 
     private int code; // 100 : 성공
+    private String username;
     private List<String> path;
 
 }
