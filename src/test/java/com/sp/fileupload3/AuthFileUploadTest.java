@@ -68,9 +68,9 @@ public class AuthFileUploadTest {
 
     @AfterEach
     void after() throws IOException {
-//        if(Files.exists(root)) {
-//            FileSystemUtils.deleteRecursively(root);
-//        }
+        if(Files.exists(root)) {
+            FileSystemUtils.deleteRecursively(root);
+        }
     }
 
 
@@ -78,10 +78,10 @@ public class AuthFileUploadTest {
     @Test
     @WithMockUser(username = "user1", roles = {"USER"})
     void test_1() throws Exception {
-//        Mockito.when()
         String respStr = mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                         .file(new MockMultipartFile("file", "test1.txt", MediaType.TEXT_PLAIN_VALUE,
                                 new ClassPathResource("test1.txt").getInputStream()))
+                        .param("boardId", ""+123)
                         .with(csrf())
                 ).andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
@@ -89,6 +89,7 @@ public class AuthFileUploadTest {
         UploadResult result = objectMapper.readValue(respStr, UploadResult.class);
 
         assertEquals("user1", result.getUserId());
+        assertEquals(123L, result.getBoardId());
         assertEquals("/files/test1.txt", result.getPath().get(0));
     }
 
@@ -101,6 +102,7 @@ public class AuthFileUploadTest {
                                 new ClassPathResource("test1.txt").getInputStream()))
                         .file(new MockMultipartFile("files", "test2.txt", MediaType.TEXT_PLAIN_VALUE,
                                 new ClassPathResource("test2.txt").getInputStream()))
+                        .param("boardId", ""+123)
                         .with(csrf())
                 ).andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
@@ -108,9 +110,12 @@ public class AuthFileUploadTest {
         UploadResult result = objectMapper.readValue(respStr, UploadResult.class);
 
         assertEquals("user1", result.getUserId());
+        assertEquals(123L, result.getBoardId());
         assertEquals("/files/test1.txt", result.getPath().get(0));
         assertEquals("/files/test2.txt", result.getPath().get(1));
-
     }
+
+
+
 
 }

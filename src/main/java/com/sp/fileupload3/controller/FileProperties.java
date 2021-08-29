@@ -1,21 +1,20 @@
 package com.sp.fileupload3.controller;
 
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UploadResult {
+@ConfigurationProperties(prefix = "sp.fileupload")
+public class FileProperties {
 
-    private int code; // 100 : 성공
-    private String userId;
-    private Long boardId;
-    private List<String> path;
+    private String dir = "upload-dir";
 
 }

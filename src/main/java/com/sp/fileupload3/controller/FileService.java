@@ -1,6 +1,9 @@
 package com.sp.fileupload3.controller;
 
+import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,15 +11,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+@Slf4j
 @Service
 public class FileService {
 
+    @Getter
     @Setter
     private Path root;
 
-    public FileService() {
-        // property... 에서 설정해서 가져와야 함.
-        this.root = Path.of("upload-dir");
+    @Value("${sp.fileupload.dir:upload-dir}")
+    private String uploadDir;
+
+    public void setUploadDir(String uploadDir){
+        log.info("=======");
+        this.uploadDir = uploadDir;
+        log.info(uploadDir);
+        this.root = Path.of(uploadDir);
         try {
             init();
         } catch (IOException e) {
