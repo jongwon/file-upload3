@@ -36,6 +36,7 @@ public class FileService {
     }
 
 
-
-
+    public Path getFile(String path) {
+        return root.resolve(path);
+    }
 }

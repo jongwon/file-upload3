@@ -1,0 +1,9 @@
+spring:
+  messages:
+    encoding: UTF-8
+
+
+logging:
+  level:
+    org.springframework:
+      web: trace
